@@ -4,7 +4,7 @@ var existCondition = setInterval(function () {
     const btn_original = document.querySelector(".quick-analysis-buttons > .ui_v5-button-basic")
 
     // If the button doesnt exist then exit the function
-    if (typeof (btn_original) != 'undefined' && btn_original != null) {
+    if (typeof (btn_original) != 'undefined' && btn_original != null && btn_original.id == "") {
 
         console.log("Executing");
         
@@ -16,12 +16,12 @@ var existCondition = setInterval(function () {
         const parent = btn_original.parentNode
         btn_original.replaceWith(btn_custom)
 
+        btn_custom.id = "LichessAnalysis"
+
         // Modify the click event on btn so that when we click it opens the game in lichess
         btn_custom.onclick = function () {
             console.log("RUNNIN");
         };
-
-        clearInterval(existCondition);
     }
 
 }, 1000);  // Check every second

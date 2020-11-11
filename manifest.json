@@ -9,7 +9,7 @@
     "content_scripts":[
         {
             "js":["analyze.js"],
-            "matches":["*://*.chess.com/game/live/*"]
+            "matches":["*://*.chess.com/*"]
         }
     ]
 }
