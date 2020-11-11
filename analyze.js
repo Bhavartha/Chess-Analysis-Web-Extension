@@ -14,8 +14,12 @@ var existCondition = setInterval(function () {
 
         // Get the parent node of the Analysis button
         const parent = btn_original.parentNode
+
+        // Replace the original button with our custom button
         btn_original.replaceWith(btn_custom)
 
+        // Adding custom id so that we can check if element has our custom id
+        // If it has then we dont have to redo the procedure
         btn_custom.id = "LichessAnalysis"
 
         // Modify the click event on btn so that when we click it opens the game in lichess
@@ -32,8 +36,14 @@ var existCondition = setInterval(function () {
                 await new Promise(r => setTimeout(r, 500));
             }
 
+            // Store the PGN value in variable
             const PGN = document.querySelector(pgnSelector).value
-            console.log(PGN);
+
+            // Close popup
+            document.querySelector(".icon-font-chess.x.icon-font-secondary").click()
+
+
+            window.open("https://lichess.org")
         };
     }
 
