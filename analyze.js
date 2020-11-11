@@ -7,7 +7,7 @@ var existCondition = setInterval(function () {
     if (typeof (btn_original) != 'undefined' && btn_original != null && btn_original.id == "") {
 
         console.log("Executing");
-        
+
         // Clone the Analysis Button 
         // Note: It doesnt clone onclick events
         const btn_custom = btn_original.cloneNode(true);
@@ -20,7 +20,17 @@ var existCondition = setInterval(function () {
 
         // Modify the click event on btn so that when we click it opens the game in lichess
         btn_custom.onclick = function () {
-            console.log("RUNNIN");
+
+            // Find the share button and click it
+            const share_btn = document.querySelector(".icon-font-chess.share")
+            share_btn.click()
+
+            // let PGN = null;
+            // while (!PGN) {
+            //     // Get the PGN text from TextArea
+            //     PGN = document.querySelector(".form-textarea-component.share-menu-tab-pgn-textarea").value
+            // }
+            // console.log(PGN);
         };
     }
 
