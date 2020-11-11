@@ -19,18 +19,21 @@ var existCondition = setInterval(function () {
         btn_custom.id = "LichessAnalysis"
 
         // Modify the click event on btn so that when we click it opens the game in lichess
-        btn_custom.onclick = function () {
+        btn_custom.onclick = async function () {
 
             // Find the share button and click it
             const share_btn = document.querySelector(".icon-font-chess.share")
             share_btn.click()
 
-            // let PGN = null;
-            // while (!PGN) {
-            //     // Get the PGN text from TextArea
-            //     PGN = document.querySelector(".form-textarea-component.share-menu-tab-pgn-textarea").value
-            // }
-            // console.log(PGN);
+            const pgnSelector = ".form-textarea-component.share-menu-tab-pgn-textarea"
+
+            // Wait till the popup is loaded and PGN is added to DOM
+            while (!document.querySelector(pgnSelector)) {
+                await new Promise(r => setTimeout(r, 500));
+            }
+
+            const PGN = document.querySelector(pgnSelector).value
+            console.log(PGN);
         };
     }
 
