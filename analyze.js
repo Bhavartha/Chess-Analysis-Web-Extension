@@ -41,8 +41,7 @@ var existCondition = setInterval(function () {
 
             // Close popup
             document.querySelector(".icon-font-chess.x.icon-font-secondary").click()
-
-
+            
             window.open("https://lichess.org")
         };
     }
