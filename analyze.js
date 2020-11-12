@@ -1,3 +1,23 @@
+function openLichess(PGN) {
+
+    var data = new URLSearchParams();
+    data.append("pgn", PGN)
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://lichess.org/api/import");
+    xhr.responseType = 'json';
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            window.open(this.response.url,'_blank')
+        }
+    });
+
+    xhr.send(data);
+}
+
+
 var existCondition = setInterval(function () {
 
     // Get Analysis Button
@@ -5,8 +25,6 @@ var existCondition = setInterval(function () {
 
     // If the button doesnt exist then exit the function
     if (typeof (btn_original) != 'undefined' && btn_original != null && btn_original.id == "") {
-
-        console.log("Executing");
 
         // Clone the Analysis Button 
         // Note: It doesnt clone onclick events
@@ -23,7 +41,9 @@ var existCondition = setInterval(function () {
         btn_custom.id = "LichessAnalysis"
 
         // Modify the click event on btn so that when we click it opens the game in lichess
-        btn_custom.onclick = async function () {
+        btn_custom.onclick = async function (e) {
+
+            e.preventDefault()
 
             // Find the share button and click it
             const share_btn = document.querySelector(".icon-font-chess.share")
@@ -41,8 +61,9 @@ var existCondition = setInterval(function () {
 
             // Close popup
             document.querySelector(".icon-font-chess.x.icon-font-secondary").click()
-            
-            window.open("https://lichess.org")
+
+            // Open lichess containing our game
+            openLichess(PGN)
         };
     }
 
