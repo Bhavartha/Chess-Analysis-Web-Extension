@@ -2,10 +2,10 @@
     "manifest_version": 2,
     "name": "Chess Analysis",
     "description": "Analysis on Chess.com is not free. This simple extension opens the game in Lichess Analysis so we can easily analyze our games",
-    "version": "1.1",
+    "version": "1.2",
     "icons": {
-        "48": "icon.png",
-        "96": "icon@2x.png"
+        "48": "icons/icon-48.png",
+        "96": "icons/icon-96.png"
     },
     "content_scripts": [
         {
