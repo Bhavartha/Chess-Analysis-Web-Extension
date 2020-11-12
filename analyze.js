@@ -1,16 +1,27 @@
 function openLichess(PGN) {
 
+    // URLEncodes our game PGN and assigns it to parameter pgn should will be sent to lichess
     var data = new URLSearchParams();
     data.append("pgn", PGN)
 
+    // Create and open new Request
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://lichess.org/api/import");
+
+    // Specifying that the response that we get should be treated as JSON response
     xhr.responseType = 'json';
+
+    // Settings contect-type as specified in Lichess API Docs
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
+    // Event Listener that is fired whenever the readyState of xhr object is changed
     xhr.addEventListener("readystatechange", function () {
+
+        // State 4 = DONE.The operation is complete.
         if (this.readyState === 4) {
-            window.open(this.response.url,'_blank')
+
+            // Open the url received in new tab
+            window.open(this.response.url, '_blank')
         }
     });
 
