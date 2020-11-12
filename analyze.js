@@ -25,6 +25,7 @@ function openLichess(PGN) {
         }
     });
 
+    // Send the created request
     xhr.send(data);
 }
 
