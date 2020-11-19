@@ -29,12 +29,36 @@ function openLichess(PGN) {
     xhr.send(data);
 }
 
+async function findPGN() {
+
+    // Find the share button and click it
+    const share_btn = document.querySelector(".share")
+    share_btn.click()
+
+    const pgnSelector = ".form-textarea-component.share-menu-tab-pgn-textarea"
+
+    // Wait till the popup is loaded and PGN is added to DOM
+    while (!document.querySelector(pgnSelector)) {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    // Store the PGN value in variable
+    const PGN = document.querySelector(pgnSelector).value
+
+    // Close popup
+    document.querySelector(".icon-font-chess.x.icon-font-secondary").click()
+
+    // Open lichess containing our game
+    openLichess(PGN)
+}
 
 var existCondition = setInterval(function () {
 
-    // Get Analysis Button
-    const btn_original = document.querySelector(".quick-analysis-buttons > .ui_v5-button-basic")
+    // If analysis url then call different function
 
+    // Get Analysis Button
+    let btn_original = document.querySelector(".quick-analysis-buttons")
+    
     // If the button doesnt exist then exit the function
     if (typeof (btn_original) != 'undefined' && btn_original != null && btn_original.id == "") {
 
@@ -52,30 +76,13 @@ var existCondition = setInterval(function () {
         // If it has then we dont have to redo the procedure
         btn_custom.id = "LichessAnalysis"
 
+        // Also change text to Lichess Analysis
+        btn_custom.innerHtml = "Lichess Analysis"
+
         // Modify the click event on btn so that when we click it opens the game in lichess
         btn_custom.onclick = async function (e) {
-
             e.preventDefault()
-
-            // Find the share button and click it
-            const share_btn = document.querySelector(".icon-font-chess.share")
-            share_btn.click()
-
-            const pgnSelector = ".form-textarea-component.share-menu-tab-pgn-textarea"
-
-            // Wait till the popup is loaded and PGN is added to DOM
-            while (!document.querySelector(pgnSelector)) {
-                await new Promise(r => setTimeout(r, 500));
-            }
-
-            // Store the PGN value in variable
-            const PGN = document.querySelector(pgnSelector).value
-
-            // Close popup
-            document.querySelector(".icon-font-chess.x.icon-font-secondary").click()
-
-            // Open lichess containing our game
-            openLichess(PGN)
+            findPGN()
         };
     }
 
